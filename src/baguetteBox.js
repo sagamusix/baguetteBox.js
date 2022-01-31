@@ -782,12 +782,23 @@
         currentIndex = 0;
     }
 
+    function setup() {
+        if(supports.transforms !== undefined)
+            return;
+        supports.transforms = testTransformsSupport();
+        supports.svg = testSvgSupport();
+        supports.passiveEvents = testPassiveEventsSupport();
+
+        buildOverlay();
+    }
+
     return {
         run: run,
         show: show,
         showNext: showNextImage,
         showPrevious: showPreviousImage,
         hide: hideOverlay,
-        destroy: destroyPlugin
+        destroy: destroyPlugin,
+        setup: setup
     };
 }));
